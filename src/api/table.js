@@ -7,3 +7,13 @@ export function getList(params) {
     params
   })
 }
+
+export function deleteById(id) {
+  return request({
+    url: '/building/remove',
+    method: 'delete',
+    params: {
+      buildingId: id
+    }
+  })
+}

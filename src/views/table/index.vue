@@ -81,12 +81,17 @@
           {{ scope.row.purpose }}
         </template>
       </el-table-column>
+      <el-table-column label="删除" width="110" align="center">
+        <template slot-scope="scope">
+          <el-button type="danger" @click="onDelete(scope.row.id)" size="mini">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
-import {getList} from '@/api/table'
+import {getList, deleteById} from '@/api/table'
 
 export default {
   filters: {
@@ -109,6 +114,13 @@ export default {
     this.fetchData()
   },
   methods: {
+    onDelete(id) {
+      console.log(id)
+      deleteById(id).then(() => {
+        // 刷新当前页面
+        this.fetchData()
+      })
+    },
     fetchData() {
       this.listLoading = true
       getList().then(response => {
